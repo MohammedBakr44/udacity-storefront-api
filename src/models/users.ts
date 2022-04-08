@@ -1,4 +1,15 @@
 import Client from "../database";
+import * as dotenv from 'dotenv';
+import bcrypt from 'bcrypt';
+
+dotenv.config();
+
+const { HASH_PASSWORD, SALT_ROUNDS } = process.env;
+
+const hashPassword = (password: string) => {
+    const salt = parseInt(SALT_ROUNDS as string);
+    return bcrypt.hashSync(`${password}${HASH_PASSWORD}`, salt);
+}
 
 export type User = {
     id?: string,
@@ -28,7 +39,7 @@ export class Users {
             const result = await connection.query(query, [
                 user.firstName,
                 user.lastName,
-                user.password
+                hashPassword(user.password as string)
             ]);
             connection.release();
             return result.rows[0];
@@ -56,7 +67,7 @@ export class Users {
             const connection = await Client.connect();
             const query = `UPDATE Users 
                            SET firstName=$1, lastName=$2, password=$3 where id=$4 RETURNING id, firstName, lastName`;
-            const result = await connection.query(query, [user.firstName, user.lastName, user.password, user.id]);
+            const result = await connection.query(query, [user.firstName, user.lastName, hashPassword(user.password as string), user.id]);
             connection.release();
             return result.rows[0];
         } catch (error) {

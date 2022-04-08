@@ -7,7 +7,7 @@ const {
     DB_HOST,
     DB_NAME_TEST,
     DB_USER,
-    DB_PASSWORD
+    DB_PASSWORD,
 } = process.env;
 
 const client = new Pool({
