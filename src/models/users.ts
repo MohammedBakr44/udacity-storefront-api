@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 
 dotenv.config();
 
-const { HASH_PASSWORD, SALT_ROUNDS } = process.env;
+const { HASH_PASSWORD, SALT_ROUNDS, TOKEN_SECRET } = process.env;
 
 const hashPassword = (password: string) => {
     const salt = parseInt(SALT_ROUNDS as string);
@@ -83,7 +83,32 @@ export class Users {
             connection.release();
             return result.rows[0];
         } catch (error) {
-            throw new Error(`Coult not delete product, ${(error as Error).message}`)
+            throw new Error(`Could not delete product, ${(error as Error).message}`)
+        }
+    }
+
+    // authenticate user
+    async auth(id: string, password: string): Promise<User | null> {
+        try {
+            const connection = await Client.connect();
+            const query = `SELECT password FROM Users WHERE id=($1)`;
+            const result = await connection.query(query, [id]);
+            if (result.rows.length) {
+                const { password: hashPassword } = result.rows[0];
+                const isPasswordValid = bcrypt.
+                    compareSync(`${password}${HASH_PASSWORD}`, hashPassword);
+                if (isPasswordValid) {
+                    const user = await connection.query(
+                        `SELECT id, firstName, lastName from Users where id=($1)`,
+                        [id]
+                    );
+                    return user.rows[0];
+                }
+            }
+            connection.release();
+            return null;
+        } catch (error) {
+            throw new Error(`User is not authenticated, ${(error as Error).message}`)
         }
     }
 

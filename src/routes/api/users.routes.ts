@@ -11,4 +11,6 @@ routes.route('/:id')
     .get(handlers.getUser)
     .delete(handlers.deleteUser);
 
+routes.route('/auth').post(handlers.authenticate);
+
 export default routes;
