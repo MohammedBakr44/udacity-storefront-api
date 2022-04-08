@@ -3,7 +3,10 @@ import dotenv from 'dotenv';
 import Orders_route from './handlers/orders';
 //import Products_route from './handlers/products';
 import routes from './routes';
-import Users_route from './handlers/users';
+import bodyParser from 'body-parser';
+
+
+const jsonParser = bodyParser.json();
 
 dotenv.config();
 
@@ -17,7 +20,8 @@ app.get("/", (request: Request, response: Response) => {
 })
 
 //Orders_route(app);
-app.use('/api', routes);
+app.use('/api', jsonParser, routes);
+app.use('/api', jsonParser, routes);
 //Users_route(app);
 
 app.listen(PORT, () => {
