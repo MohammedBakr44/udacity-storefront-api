@@ -6,7 +6,7 @@ const routes = Router();
 routes.route('/')
     .get(handlers.index)
     .post(validateToken, handlers.create)
-    .patch(validateToken, handlers.updateProduct);
+    .put(validateToken, handlers.updateProduct);
 routes.route('/:id')
     .get(handlers.getProduct)
     .delete(validateToken, handlers.deleteProduct);
