@@ -6,7 +6,7 @@ const routes = Router();
 
 routes.route('/')
     .get(validateToken, handlers.index)
-    .post(validateToken, handlers.create)
+    .post(handlers.create)
     .put(validateToken, handlers.updateUser);
 routes.route('/:id')
     .get(validateToken, handlers.getUser)

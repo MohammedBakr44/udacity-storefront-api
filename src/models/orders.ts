@@ -11,20 +11,28 @@ export type Order = {
 export class Orders {
 
     async getOrder(id: string): Promise<Order> {
-        const connection = await Client.connect();
-        const query = 'SELECT * FROM Orders WHERE id=($1)';
-        const result = await connection.query(query, [id]);
-        connection.release();
-        return result.rows[0];
+        try {
+            const connection = await Client.connect();
+            const query = 'SELECT * FROM Orders WHERE id=($1)';
+            const result = await connection.query(query, [id]);
+            connection.release();
+            return result.rows[0];
+        } catch (error) {
+
+            throw new Error('Cannot find order');
+        }
     }
 
     async getOrderProducts(): Promise<Order[]> {
-        const connection = await Client.connect();
-        //const query = 'SELECT name, price, order_id FROM Products INNER JOIN order_products ON products.id=order_products.product_id';
-        const query = 'SELECT * FROM Products INNER JOIN order_products ON products.id=order_products.product_id';
-        const result = await connection.query(query);
-        connection.release();
-        return [...result.rows];
+        try {
+            const connection = await Client.connect();
+            const query = 'SELECT * FROM Products INNER JOIN order_products ON products.id=order_products.product_id';
+            const result = await connection.query(query);
+            connection.release();
+            return [...result.rows];
+        } catch (error) {
+            throw new Error('cannot get orders');
+        }
     }
 
     async addOrder(order: Order): Promise<Order> {
