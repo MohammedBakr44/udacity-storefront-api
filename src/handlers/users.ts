@@ -18,8 +18,7 @@ export const index = async (request: Request, response: Response, next: NextFunc
     } catch (error) {
         next(error);
     }
-
-}
+};
 
 export const create = async (request: Request, response: Response, next: NextFunction) => {
     try {
@@ -27,11 +26,11 @@ export const create = async (request: Request, response: Response, next: NextFun
         response.status(200).json({
             status: '200 OK',
             data: { ...user }
-        })
+        });
     } catch (error) {
-        next(error)
+        next(error);
     }
-}
+};
 
 export const getUser = async (request: Request, response: Response, next: NextFunction) => {
     try {
@@ -39,11 +38,11 @@ export const getUser = async (request: Request, response: Response, next: NextFu
         response.status(200).json({
             status: '200 OK',
             data: user
-        })
+        });
     } catch (error) {
-        next(error)
+        next(error);
     }
-}
+};
 
 export const updateUser = async (request: Request, response: Response, next: NextFunction) => {
     try {
@@ -51,11 +50,11 @@ export const updateUser = async (request: Request, response: Response, next: Nex
         response.status(200).json({
             status: '200 OK',
             data: user
-        })
+        });
     } catch (error) {
         next(error);
     }
-}
+};
 
 export const deleteUser = async (request: Request, response: Response, next: NextFunction) => {
     try {
@@ -63,11 +62,11 @@ export const deleteUser = async (request: Request, response: Response, next: Nex
         response.status(200).json({
             status: '200 OK',
             data: user
-        })
+        });
     } catch (error) {
         next(error);
     }
-}
+};
 
 export const authenticate = async (request: Request, response: Response, next: NextFunction) => {
     try {
@@ -76,14 +75,14 @@ export const authenticate = async (request: Request, response: Response, next: N
         const token = jwt.sign({ user }, process.env.TOKEN_SECRET as string);
         if (!user) {
             return response.status(401).json({
-                status: '401 access denied',
-            })
+                status: '401 access denied'
+            });
         }
         return response.status(200).json({
             status: '200 OK',
             data: { ...user, token }
-        })
+        });
     } catch (error) {
-        next(error)
+        next(error);
     }
-}
+};

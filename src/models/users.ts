@@ -1,4 +1,4 @@
-import Client from "../database";
+import Client from '../database';
 import * as dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 
@@ -9,14 +9,14 @@ const { HASH_PASSWORD, SALT_ROUNDS, TOKEN_SECRET } = process.env;
 const hashPassword = (password: string) => {
     const salt = parseInt(SALT_ROUNDS as string);
     return bcrypt.hashSync(`${password}${HASH_PASSWORD}`, salt);
-}
+};
 
 export type User = {
-    id?: string,
-    firstName: string,
-    lastName: string,
-    password?: string
-}
+    id?: string;
+    firstName: string;
+    lastName: string;
+    password?: string;
+};
 
 export class Users {
     async index(): Promise<User[]> {
@@ -43,7 +43,6 @@ export class Users {
             ]);
             connection.release();
             return result.rows[0];
-
         } catch (err) {
             console.log(err);
             throw new Error(`Unable to create user`);
@@ -67,7 +66,12 @@ export class Users {
             const connection = await Client.connect();
             const query = `UPDATE Users 
                            SET firstName=$1, lastName=$2, password=$3 where id=$4 RETURNING id, firstName, lastName`;
-            const result = await connection.query(query, [user.firstName, user.lastName, hashPassword(user.password as string), user.id]);
+            const result = await connection.query(query, [
+                user.firstName,
+                user.lastName,
+                hashPassword(user.password as string),
+                user.id
+            ]);
             connection.release();
             return result.rows[0];
         } catch (error) {
@@ -83,7 +87,7 @@ export class Users {
             connection.release();
             return result.rows[0];
         } catch (error) {
-            throw new Error(`Could not delete product, ${(error as Error).message}`)
+            throw new Error(`Could not delete product, ${(error as Error).message}`);
         }
     }
 
@@ -95,8 +99,7 @@ export class Users {
             const result = await connection.query(query, [id]);
             if (result.rows.length) {
                 const { password: hashPassword } = result.rows[0];
-                const isPasswordValid = bcrypt.
-                    compareSync(`${password}${HASH_PASSWORD}`, hashPassword);
+                const isPasswordValid = bcrypt.compareSync(`${password}${HASH_PASSWORD}`, hashPassword);
                 if (isPasswordValid) {
                     const user = await connection.query(
                         `SELECT id, firstName, lastName from Users where id=($1)`,
@@ -108,8 +111,7 @@ export class Users {
             connection.release();
             return null;
         } catch (error) {
-            throw new Error(`User is not authenticated, ${(error as Error).message}`)
+            throw new Error(`User is not authenticated, ${(error as Error).message}`);
         }
     }
-
 }

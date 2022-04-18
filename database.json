@@ -3,6 +3,13 @@
         "user": "postgres",
         "password": "postgres",
         "host": "127.0.0.1",
+        "database": "store_dev",
+        "driver": "pg"
+    },
+    "test": {
+        "user": "postgres",
+        "password": "postgres",
+        "host": "127.0.0.1",
         "database": "store_test",
         "driver": "pg"
     }
