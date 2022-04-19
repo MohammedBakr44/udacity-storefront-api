@@ -5,7 +5,6 @@ const store = new Products();
 export const index = async (_request: Request, response: Response, next: NextFunction) => {
   try {
     const products = await store.index();
-    console.log(products);
     response.status(200).json({
       status: '200 OK',
       data: products

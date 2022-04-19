@@ -40,6 +40,7 @@ export const getUser = async (request: Request, response: Response, next: NextFu
             data: user
         });
     } catch (error) {
+        response.status(400);
         next(error);
     }
 };
@@ -52,6 +53,7 @@ export const updateUser = async (request: Request, response: Response, next: Nex
             data: user
         });
     } catch (error) {
+        response.status(400);
         next(error);
     }
 };
@@ -64,6 +66,8 @@ export const deleteUser = async (request: Request, response: Response, next: Nex
             data: user
         });
     } catch (error) {
+        response.status(400).send();
+        console.error(error);
         next(error);
     }
 };
@@ -83,6 +87,7 @@ export const authenticate = async (request: Request, response: Response, next: N
             data: { ...user, token }
         });
     } catch (error) {
+        response.status(401);
         next(error);
     }
 };

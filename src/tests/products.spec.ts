@@ -51,7 +51,6 @@ export default function ProductsSpec() {
         password: user.password
       });
       token = authUser.body.data.token;
-      console.log(token);
     })
     it('Index all products', async () => {
       const response = await request.get('/api/products');

@@ -87,7 +87,7 @@ export class Users {
             connection.release();
             return result.rows[0];
         } catch (error) {
-            throw new Error(`Could not delete product, ${(error as Error).message}`);
+            throw new Error(`Could not delete user, ${(error as Error).message}`);
         }
     }
 
