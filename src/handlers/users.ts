@@ -67,7 +67,6 @@ export const deleteUser = async (request: Request, response: Response, next: Nex
         });
     } catch (error) {
         response.status(400).send();
-        console.error(error);
         next(error);
     }
 };

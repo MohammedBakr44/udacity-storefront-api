@@ -44,7 +44,6 @@ export class Users {
             connection.release();
             return result.rows[0];
         } catch (err) {
-            console.log(err);
             throw new Error(`Unable to create user`);
         }
     }
@@ -105,6 +104,7 @@ export class Users {
                         `SELECT id, firstName, lastName from Users where id=($1)`,
                         [id]
                     );
+                    connection.release();
                     return user.rows[0];
                 }
             }

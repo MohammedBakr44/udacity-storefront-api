@@ -44,8 +44,6 @@ const userSpec = () => {
                 password: user.password
             });
             token = authUser.body.data.token;
-            console.log(token);
-            console.log(user);
         })
         it('index all users', async () => {
             const response = await request.get('/api/users')
@@ -67,6 +65,23 @@ const userSpec = () => {
                     password: user.password
                 })
             expect(response.status).toEqual(200);
+        });
+        it('authorize a user', async () => {
+            const response = await request.post('/api/users/auth')
+                .send({
+                    id: user.id,
+                    password: user.password
+                });
+            expect(response.status).toEqual(200);
+        });
+
+        it('authorize a user with wrong id', async () => {
+            const response = await request.post('/api/users/auth')
+                .send({
+                    id: '1',
+                    password: user.password
+                });
+            expect(response.status).toEqual(401);
         });
         it('updates a user', async () => {
             const response = await request.put('/api/users')
@@ -119,23 +134,7 @@ const userSpec = () => {
                 .set('Authorization', `Bearer ${token}`);
             expect(response.status).toEqual(400);
         })
-        it('authorize a user', async () => {
-            const response = await request.post('/api/users/auth')
-                .send({
-                    id: user.id,
-                    password: user.password
-                });
-            expect(response.status).toEqual(200);
-        });
 
-        it('authorize a user with wrong id', async () => {
-            const response = await request.post('/api/users/auth')
-                .send({
-                    id: '1',
-                    password: user.password
-                });
-            expect(response.status).toEqual(401);
-        });
         it('deletes a user', async () => {
             const response = await request.delete(`/api/users/${user.id}`)
                 .set('content-type', 'application/json')

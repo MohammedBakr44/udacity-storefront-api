@@ -16,7 +16,6 @@ export class Products {
       connection.release();
       return result.rows[0];
     } catch (err) {
-      console.log(err);
       throw new Error(`Unable to create product`);
     }
   }

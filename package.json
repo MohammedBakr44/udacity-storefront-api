@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon src/main.ts",
-    "test": "ENV=test&& db-migrate --env test reset && yarn build && db-migrate --env test up && jasmine",
+    "test": "export ENV=test&& db-migrate --env test reset && yarn build && db-migrate --env test up && jasmine && db-migrate --env test reset",
     "build": "tsc",
     "lint": "eslint src/**/*.ts",
     "lint:f": "eslint src/**/*.ts --fix",
