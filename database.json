@@ -1,16 +1,32 @@
 {
     "dev": {
-        "user": "postgres",
-        "password": "postgres",
-        "host": "127.0.0.1",
-        "database": "store_dev",
+        "user": {
+            "ENV": "DB_USERNAME"
+        },
+        "password": {
+            "ENV": "DB_PASSWORD"
+        },
+        "host": {
+            "ENV": "DB_HOST"
+        },
+        "database": {
+            "ENV": "DB_NAME_DEV"
+        },
         "driver": "pg"
     },
     "test": {
-        "user": "postgres",
-        "password": "postgres",
-        "host": "127.0.0.1",
-        "database": "store_test",
+        "user": {
+            "ENV": "DB_USERNAME"
+        },
+        "password": {
+            "ENV": "DB_PASSWORD"
+        },
+        "host": {
+            "ENV": "DB_HOST"
+        },
+        "database": {
+            "ENV": "DB_NAME_TEST"
+        },
         "driver": "pg"
     }
 }
