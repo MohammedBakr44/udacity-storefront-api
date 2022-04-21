@@ -1,9 +1,9 @@
-import express, { NextFunction, Request, Response } from 'express';
-import { Order, Orders } from '../models/orders';
+import { Request, Response } from 'express';
+import { Orders } from '../models/orders';
 
 const store = new Orders();
 
-export const show = async (request: Request, response: Response, next: NextFunction) => {
+export const show = async (request: Request, response: Response) => {
   try {
     const order = await store.getOrder(request.params.id);
     response.status(200).json({
@@ -15,11 +15,7 @@ export const show = async (request: Request, response: Response, next: NextFunct
   }
 };
 
-export const getOrderProducts = async (
-  request: Request,
-  response: Response,
-  next: NextFunction
-) => {
+export const getOrderProducts = async (_request: Request, response: Response) => {
   try {
     const order = await store.getOrderProducts();
     response.status(200).json({
@@ -31,7 +27,7 @@ export const getOrderProducts = async (
   }
 };
 
-export const create = async (request: Request, response: Response, next: NextFunction) => {
+export const create = async (request: Request, response: Response) => {
   try {
     const order = await store.addOrder(request.body);
     response.status(200).json({
@@ -43,7 +39,7 @@ export const create = async (request: Request, response: Response, next: NextFun
   }
 };
 
-export const createProduct = async (request: Request, response: Response, next: NextFunction) => {
+export const createProduct = async (request: Request, response: Response) => {
   try {
     const product = await store.addProductToOrder(
       request.body.order_id,

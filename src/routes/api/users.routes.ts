@@ -14,13 +14,4 @@ routes.route('/:id')
 
 routes.route('/auth').post(handlers.authenticate);
 
-const users_route = (app: express.Application) => {
-    app.get('/api/users', validateToken, handlers.index);
-    app.post('/api/users', handlers.create);
-    app.put('/api/users', validateToken, handlers.updateUser);
-    app.get('/api/users/:id', validateToken, handlers.getUser);
-    app.delete('/api/users/:id', validateToken, handlers.deleteUser);
-    app.post('/api/users/auth', handlers.authenticate);
-}
-
-export default users_route;
+export default routes;

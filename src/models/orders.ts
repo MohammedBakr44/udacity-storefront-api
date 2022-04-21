@@ -1,4 +1,3 @@
-import { Connection } from 'pg';
 import Client from '../database';
 
 export type Order = {
@@ -55,10 +54,10 @@ export class Orders {
     product_id: string,
     product_quantity: number
   ): Promise<{
-    id: string,
-    quantity: number,
-    order_id: string,
-    product_id: string
+    id: string;
+    quantity: number;
+    order_id: string;
+    product_id: string;
   }> {
     const connection = await Client.connect();
     try {

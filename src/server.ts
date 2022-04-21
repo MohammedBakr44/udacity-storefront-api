@@ -8,7 +8,7 @@ export const app = express();
 
 app.use(express.json());
 const { PORT } = process.env;
-users_routes(app);
+// users_routes(app);
 app.get("/", (request: Request, response: Response) => {
     response.status(200).json({ message: "Hello( ͡° ͜ʖ ͡°)" });
 })

@@ -5,7 +5,7 @@ import OrdersRoutes from './api/orders.routes';
 
 const routes = Router();
 routes.use('/products', productsRoutes);
-// routes.use('/users', UsersRoutes);
+routes.use('/users', UsersRoutes);
 routes.use('/orders', OrdersRoutes);
 
 export default routes;

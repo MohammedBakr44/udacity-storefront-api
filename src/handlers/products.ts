@@ -1,8 +1,8 @@
-import express, { NextFunction, Request, Response } from 'express';
-import { Product, Products } from '../models/products';
+import { NextFunction, Request, Response } from 'express';
+import { Products } from '../models/products';
 
 const store = new Products();
-export const index = async (_request: Request, response: Response, next: NextFunction) => {
+export const index = async (_request: Request, response: Response) => {
   try {
     const products = await store.index();
     response.status(200).json({
@@ -14,7 +14,7 @@ export const index = async (_request: Request, response: Response, next: NextFun
   }
 };
 
-export const create = async (request: Request, response: Response, next: NextFunction) => {
+export const create = async (request: Request, response: Response) => {
   try {
     const product = await store.addProduct(request.body);
     response.status(200).json({
@@ -39,7 +39,7 @@ export const getProduct = async (request: Request, response: Response, next: Nex
   }
 };
 
-export const updateProduct = async (request: Request, response: Response, next: NextFunction) => {
+export const updateProduct = async (request: Request, response: Response) => {
   try {
     const product = await store.updateProduct(request.body);
     response.status(200).json({
