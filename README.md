@@ -16,7 +16,7 @@
 - `handlers` model handlers that recieves the requests and send respones as well as status codes.
 - `routes` the configuration for all routes.
 - `middleware` authentication middleware.
-` `tests` all test suits.
+- `tests` all test suits.
 - `server.ts` main server configuration.
 - `database.ts` database configuration.
 
