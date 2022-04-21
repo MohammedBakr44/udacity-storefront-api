@@ -24,7 +24,7 @@
 # installation
 `yarn` or `npm install` to install required packages.
 
-`yarn start` or `npm run start` will run `nodemon` and start the server on the port defined in environment variables.
+`yarn start` or `npm run start` will run `nodemon` and start the server and the database on the `ports` defined in environment variables.
 
 ## Migrations
 Start by creating two data-bases, a data-base for testing and another for development.
