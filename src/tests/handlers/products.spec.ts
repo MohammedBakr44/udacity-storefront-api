@@ -1,6 +1,6 @@
-import { Product, Products } from '../models/products';
-import { User, Users } from '../models/users';
-import { app } from '../server';
+import { Product, Products } from '../../models/products';
+import { User, Users } from '../../models/users';
+import { app } from '../../server';
 import supertest from 'supertest';
 
 const request = supertest(app);
@@ -12,36 +12,15 @@ const product: Product = {
 }
 const userStore = new Users();
 const user: User = {
-  firstName: 'BMO',
-  lastName: 'MOE',
+  firstname: 'BMO',
+  lastname: 'MOE',
   password: 'adventureTime12'
 }
 let token: string = '';
 
-export default function ProductsSpec() {
-  describe('Products model', () => {
-    it('Has addProduct method', () => {
-      expect(store.addProduct).toBeDefined();
-    });
+export default function ProductsSpecHandlers() {
 
-    it('Has index method', () => {
-      expect(store.index).toBeDefined();
-    });
-
-    it('Has get product method', () => {
-      expect(store.getProduct).toBeDefined();
-    });
-
-    it('Has update product method', () => {
-      expect(store.updateProduct).toBeDefined();
-    });
-
-    it('Has delete product method', () => {
-      expect(store.deleteProduct).toBeDefined();
-    });
-  });
-
-  describe('Products CRUD', () => {
+  describe('Products Endpoints', () => {
     beforeAll(async () => {
       const testUser = await userStore.addUser(user);
       const testProduct = await store.addProduct(product);

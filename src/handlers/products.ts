@@ -11,7 +11,6 @@ export const index = async (_request: Request, response: Response, next: NextFun
     });
   } catch (error) {
     response.status(400);
-    next(error);
   }
 };
 
@@ -24,7 +23,6 @@ export const create = async (request: Request, response: Response, next: NextFun
     });
   } catch (error) {
     response.status(401);
-    next(error);
   }
 };
 
@@ -50,7 +48,6 @@ export const updateProduct = async (request: Request, response: Response, next: 
     });
   } catch (error) {
     response.status(401);
-    next(error);
   }
 };
 

@@ -1,41 +1,17 @@
-import { User, Users } from '../models/users';
-import { app } from '../server';
+import { User, Users } from '../../models/users';
+import { app } from '../../server';
 import supertest from 'supertest';
 
 const request = supertest(app);
 const store = new Users();
 const user: User = {
-    firstName: 'Finn',
-    lastName: 'The Human',
+    firstname: 'Finn',
+    lastname: 'The Human',
     password: 'Marci12'
 }
 let token: string;
-const userSpec = () => {
-    describe('User model', () => {
-        it('has index mathod', () => {
-            expect(store.index).toBeDefined();
-        })
-        it('has add method', () => {
-            expect(store.addUser).toBeDefined();
-        })
-
-        it('has get method', () => {
-            expect(store.getUser).toBeDefined();
-        })
-
-        it('has update method', () => {
-            expect(store.updateUser).toBeDefined();
-        })
-
-        it('has delete method', () => {
-            expect(store.deleteUser).toBeDefined();
-        })
-        it('has auth method', () => {
-            expect(store.auth).toBeDefined();
-        })
-    })
-
-    describe('Users CRUD', () => {
+export default function userSpecHandlers() {
+    describe('Users Endpoints', () => {
         beforeAll(async () => {
             const testUser = await store.addUser(user);
             if (testUser.id) user.id = testUser.id;
@@ -60,8 +36,8 @@ const userSpec = () => {
         it('creates a user', async () => {
             const response = await request.post('/api/users')
                 .send({
-                    firstName: user.firstName,
-                    lastName: user.lastName,
+                    firstName: user.firstname,
+                    lastName: user.lastname,
                     password: user.password
                 })
             expect(response.status).toEqual(200);
@@ -157,5 +133,3 @@ const userSpec = () => {
 
     })
 }
-
-export default userSpec;

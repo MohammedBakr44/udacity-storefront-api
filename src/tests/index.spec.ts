@@ -1,7 +1,13 @@
-import { OrdersSpec } from './orders.spec';
-import ProductsSpec from './products.spec';
-import userSpec from './users.spec';
+import OrdersSpecModel from './models/orders.spec';
+import { OrdersSpecHandlers } from './handlers/orders.spec';
+import ProductsSpecModel from './models/products.spec';
+import ProductsSpecHandlers from './handlers/products.spec';
+import userSpecModel from './models/users.spec';
+import userSpecHandlers from './handlers/users.spec';
 
-OrdersSpec();
-ProductsSpec();
-userSpec();
+OrdersSpecModel();
+OrdersSpecHandlers();
+ProductsSpecModel();
+ProductsSpecHandlers();
+userSpecModel();
+userSpecHandlers();

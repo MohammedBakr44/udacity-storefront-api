@@ -1,7 +1,7 @@
-import { Orders, Order } from '../models/orders';
-import { User, Users } from '../models/users';
-import { Product, Products } from '../models/products';
-import { app } from '../server';
+import { Orders, Order } from '../../models/orders';
+import { User, Users } from '../../models/users';
+import { Product, Products } from '../../models/products';
+import { app } from '../../server';
 import supertest from 'supertest';
 
 const store = new Orders();
@@ -15,8 +15,8 @@ const request = supertest(app);
 
 const userStore = new Users();
 const user: User = {
-    firstName: 'BMO',
-    lastName: 'MOE',
+    firstname: 'BMO',
+    lastname: 'MOE',
     password: 'adventureTime12'
 }
 
@@ -27,26 +27,9 @@ const product: Product = {
 }
 
 let token = '';
-export function OrdersSpec() {
-    describe('Orders model', () => {
-        it('should have a method to get all orders', () => {
-            expect(store.getOrderProducts).toBeDefined();
-        });
+export function OrdersSpecHandlers() {
 
-        it('should have a method to add Orders', () => {
-            expect(store.addOrder).toBeDefined();
-        });
-
-        it('should have a method to get Order', () => {
-            expect(store.getOrder).toBeDefined();
-        });
-
-        it('should have a method to add product to an order', () => {
-            expect(store.addProductToOrder).toBeDefined();
-        });
-    });
-
-    describe('Orders CRUD', () => {
+    describe('Orders Endpoints', () => {
         beforeAll(async () => {
             const testUser = await userStore.addUser(user);
             const testProduct = await productStore.addProduct(product);

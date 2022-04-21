@@ -16,9 +16,9 @@ export const validateToken = async (request: Request, response: Response, next: 
       const token = header.split(' ')[1];
       if (bearer === 'bearer' && token) {
         const decoded = jwt.verify(token, TOKEN_SECRET as string);
-        const { id, firstName, lastName } = { user: (<any>decoded).user }.user as User;
+        const { id, firstname: firstName, lastname: lastName } = { user: (<any>decoded).user }.user as User;
         const user = await store.getUser(id as string);
-        if (user.id === id && user.firstName === firstName && user.lastName === lastName) {
+        if (user.id === id && user.firstname === firstName && user.lastname === lastName) {
           next();
         } else {
           response.status(401).send(`Failed to authenticate user`);

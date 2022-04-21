@@ -12,7 +12,6 @@ export const show = async (request: Request, response: Response, next: NextFunct
     });
   } catch (error) {
     response.status(401).send('Cannot find order');
-    next(error);
   }
 };
 
@@ -29,7 +28,6 @@ export const getOrderProducts = async (
     });
   } catch (error) {
     response.status(401).send('Cannot get orders');
-    next(error);
   }
 };
 
@@ -42,7 +40,6 @@ export const create = async (request: Request, response: Response, next: NextFun
     });
   } catch (error) {
     response.status(400).send('Cannot add order');
-    next(error);
   }
 };
 
@@ -59,6 +56,5 @@ export const createProduct = async (request: Request, response: Response, next: 
     });
   } catch (error) {
     response.status(400).send('Cannot create order');
-    next(error);
   }
 };

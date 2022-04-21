@@ -16,7 +16,7 @@ export const index = async (request: Request, response: Response, next: NextFunc
             data: users
         });
     } catch (error) {
-        next(error);
+        response.status(500);
     }
 };
 
@@ -28,7 +28,7 @@ export const create = async (request: Request, response: Response, next: NextFun
             data: { ...user }
         });
     } catch (error) {
-        next(error);
+        response.status(500).send('Couldn\'t add user');
     }
 };
 
@@ -66,8 +66,8 @@ export const deleteUser = async (request: Request, response: Response, next: Nex
             data: user
         });
     } catch (error) {
-        response.status(400).send();
-        next(error);
+        response.status(400);
+        next(error)
     }
 };
 
