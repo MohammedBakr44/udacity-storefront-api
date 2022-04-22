@@ -41,7 +41,7 @@ export const getUser = async (request: Request, response: Response, next: NextFu
     });
   } catch (error) {
     response.status(400);
-    next(error);
+    next();
   }
 };
 
@@ -54,7 +54,7 @@ export const updateUser = async (request: Request, response: Response, next: Nex
     });
   } catch (error) {
     response.status(400);
-    next(error);
+    next();
   }
 };
 
@@ -67,7 +67,7 @@ export const deleteUser = async (request: Request, response: Response, next: Nex
     });
   } catch (error) {
     response.status(400);
-    next(error);
+    next();
   }
 };
 
@@ -87,6 +87,6 @@ export const authenticate = async (request: Request, response: Response, next: N
     });
   } catch (error) {
     response.status(401);
-    next(error);
+    next();
   }
 };

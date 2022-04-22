@@ -67,7 +67,7 @@ export default function ProductsSpecHandlers() {
     });
     it('Gets a product with wrong id', async () => {
       const response = await request.get(`/api/products/1`);
-      expect(response.status).toEqual(400);
+      expect(response.status).toEqual(404);
     });
     it('Deletes a product', async () => {
       const response = await request.delete(`/api/products/${product.id}`)
@@ -85,7 +85,7 @@ export default function ProductsSpecHandlers() {
       const response = await request.delete(`/api/products/1`)
         .set('content-type', 'application/json')
         .set('Authorization', `Bearer ${token}`);
-      expect(response.status).toEqual(401);
+      expect(response.status).toEqual(404);
     })
   })
 }

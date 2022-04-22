@@ -57,7 +57,7 @@ export default function userSpecHandlers() {
                     id: '1',
                     password: user.password
                 });
-            expect(response.status).toEqual(401);
+            expect(response.status).toEqual(404);
         });
         it('updates a user', async () => {
             const response = await request.put('/api/users')
@@ -90,7 +90,7 @@ export default function userSpecHandlers() {
                     password: 'password',
                     id: '1'
                 });
-            expect(response.status).toEqual(400);
+            expect(response.status).toEqual(404);
         });
         it('gets a user', async () => {
             const response = await request.get(`/api/users/${user.id}`)
@@ -108,7 +108,7 @@ export default function userSpecHandlers() {
             const response = await request.get(`/api/users/1`)
                 .set('content-type', 'application/json')
                 .set('Authorization', `Bearer ${token}`);
-            expect(response.status).toEqual(400);
+            expect(response.status).toEqual(404);
         })
 
         it('deletes a user', async () => {
@@ -121,13 +121,6 @@ export default function userSpecHandlers() {
             const response = await request.delete(`/api/users/${user.id}`)
                 .set('content-type', 'application/json')
                 .set('Authorization', `Bearer `);
-            expect(response.status).toEqual(401);
-        });
-
-        it('deletes a user with wrong id', async () => {
-            const response = await request.delete(`/api/users/1`)
-                .set('content-type', 'application/json')
-                .set('Authorization', `Bearer ${token}`);
             expect(response.status).toEqual(401);
         });
 

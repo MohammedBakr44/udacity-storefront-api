@@ -35,7 +35,7 @@ export const getProduct = async (request: Request, response: Response, next: Nex
     });
   } catch (error) {
     response.status(400);
-    next(error);
+    next();
   }
 };
 
@@ -60,6 +60,6 @@ export const deleteProduct = async (request: Request, response: Response, next: 
     });
   } catch (error) {
     response.status(401);
-    next(error);
+    next();
   }
 };
